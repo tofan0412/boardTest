@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="boardlist" resultType="BoardVo" parameterType="String">
+		SELECT *
+		  FROM board
+		 WHERE KIND_NO = #{kind_no}
+	</select>
+	
+	<insert id="boardRegist" parameterType="BoardVo">
+		INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONT,
+		                  BOARD_DATE, BOARD_DELETE,
+		                  USER_ID, KIND_NO)
+		VALUES(BOARD_SEQ.NEXTVAL, #{board_title}, #{board_cont},SYSDATE, '1', #{user_id}, #{kind_no})                 
+	</insert>
+	
+	<select id="readBoard" parameterType="String" resultType="BoardVo">
+		SELECT *
+		  FROM BOARD
+		 WHERE BOARD_NO = #{board_no}
+	</select>
+	
+	<update id="modBoard" parameterType="map">
+		UPDATE BOARD
+		   SET BOARD_TITLE = #{board_title},
+		       BOARD_CONT = #{board_cont}
+		 WHERE BOARD_NO = #{board_no}
+	</update>
+	
+	<update id="delBoard" parameterType="String">
+		UPDATE BOARD
+		   SET BOARD_DELETE = '0'
+		 WHERE BOARD_NO = #{board_no}
+	</update>
+	
+</mapper>
