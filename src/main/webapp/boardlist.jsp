@@ -53,7 +53,7 @@ $(function(){
 										<td>${board.board_no}</td>
 										<c:choose>
 											<c:when test="${board.board_delete == '0' }">
-												<td>--삭제된 게시글입니다.--</td>
+												<td>(-- 작성자에 의해 삭제된 게시글입니다 --)</td>
 											</c:when>
 											<c:when test="${board.board_delete == '1'}">
 												<td class="lineBtn" data-board_no="${board.board_no}"><a>${board.board_title}</a></td>
@@ -63,6 +63,9 @@ $(function(){
 										<td>${board.user_id}</td>
 									</tr>
 								</c:forEach>
+								<c:if test="${boardlist.size() == 0 }">
+									<td><h3 style="float : right;">작성된 글이 없습니다. </h3></td>
+								</c:if>
 								</tbody>
 							</table>
 						</div>

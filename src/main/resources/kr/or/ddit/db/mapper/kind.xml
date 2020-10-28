@@ -7,4 +7,29 @@
 		SELECT *
 		  FROM KIND
 	</select>
+	
+	<!-- 게시판의 상태를 수정한다. -->
+	<update id="changeStatus" parameterType="map">
+		UPDATE KIND
+		   SET KIND_NAME = #{kind_name},
+		       KIND_VALID = #{kind_valid}
+		 WHERE KIND_NO = #{kind_no}
+	</update>
+	
+	<!-- 신규 게시판을 등록한다. -->
+	<insert id="kindRegist" parameterType="KindVo">
+		INSERT INTO KIND(KIND_NO, KIND_NAME, KIND_VALID)
+		VALUES(KIND_SEQ.NEXTVAL, #{kind_name}, #{kind_valid})
+	</insert>
+	
+	<!--  테스트 코드용. 하나의 게시판 객체를 불러온다. -->
+	<select id="readKindOne" parameterType="String">
+		SELECT *
+		  FROM KIND
+		 WHERE KIND_NO = #{kind_no}
+	</select>
+	
+	
+	
+	
 </mapper>

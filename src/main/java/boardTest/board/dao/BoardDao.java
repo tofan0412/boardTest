@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import boardTest.board.model.BoardVo;
+import boardTest.boardfile.model.BoardfileVo;
 
 public class BoardDao implements BoardDaoI {
 	private static BoardDaoI dao;
@@ -26,7 +27,7 @@ public class BoardDao implements BoardDaoI {
 
 	@Override
 	public int boardRegist(SqlSession sqlSession, BoardVo boardVo) {
-		return sqlSession.insert("board.boardRegist", boardVo);
+		return sqlSession.insert("board.boardRegist", boardVo);   
 	}
 
 	@Override
@@ -42,6 +43,16 @@ public class BoardDao implements BoardDaoI {
 	@Override
 	public int delBoard(SqlSession sqlSession, String board_no) {
 		return sqlSession.update("board.delBoard", board_no);
+	}
+
+	@Override
+	public int boardfileRegist(SqlSession sqlSession, BoardfileVo fileVo) {
+		return sqlSession.insert("board.boardfileRegist", fileVo);
+	}
+
+	@Override
+	public List<BoardfileVo> filelistRead(SqlSession sqlSession, String board_no) {
+		return sqlSession.selectList("board.filelistRead", board_no);
 	}
 
 }

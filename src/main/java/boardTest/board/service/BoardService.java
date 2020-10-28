@@ -9,6 +9,7 @@ import boardTest.DB.MyBatisUtil;
 import boardTest.board.dao.BoardDao;
 import boardTest.board.dao.BoardDaoI;
 import boardTest.board.model.BoardVo;
+import boardTest.boardfile.model.BoardfileVo;
 
 public class BoardService implements BoardServiceI{
 	private static BoardServiceI service;
@@ -35,9 +36,14 @@ public class BoardService implements BoardServiceI{
 	public int boardRegist(BoardVo boardVo) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSession();
 		int result = dao.boardRegist(sqlSession, boardVo);
-		sqlSession.commit();
+		// 이 때 result는 개수를 불러온다.
+		if (result > 0) {
+			sqlSession.commit();
+		}
 		sqlSession.close();
-		return result;
+		// 주의해야 할 점은, xml 쿼리에서 selectKey를 적용하였기 때문에 들어간 파라미터의
+		// board_no에 시퀀스 값이 저장된다는 것이다.
+		return Integer.parseInt(boardVo.getBoard_no());
 	}
 
 	@Override
@@ -52,7 +58,9 @@ public class BoardService implements BoardServiceI{
 	public int modBoard(Map<String, String> map) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSession();
 		int result = dao.modBoard(sqlSession , map);
-		sqlSession.commit();
+		if (result > 0) {
+			sqlSession.commit();
+		}
 		sqlSession.close();
 		return result;
 	}
@@ -61,9 +69,30 @@ public class BoardService implements BoardServiceI{
 	public int delBoard(String board_no) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSession();
 		int result = dao.delBoard(sqlSession , board_no);
-		sqlSession.commit();
+		if (result > 0) {
+			sqlSession.commit();
+		}
 		sqlSession.close();
 		return result;
+	}
+
+	@Override
+	public int boardfileRegist(BoardfileVo fileVo) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		int result = dao.boardfileRegist(sqlSession, fileVo);
+		if (result > 0) {
+			sqlSession.commit();
+		}
+		sqlSession.close();
+		return 0;
+	}
+
+	@Override
+	public List<BoardfileVo> filelistRead(String board_no) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		List<BoardfileVo> filelist = dao.filelistRead(sqlSession, board_no);
+		sqlSession.close();
+		return filelist;
 	}
 
 }

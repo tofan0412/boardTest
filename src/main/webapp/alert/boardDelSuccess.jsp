@@ -9,11 +9,12 @@
 <script type="text/javascript">
 $(function(){
 	alert("게시글을 삭제하였습니다.");
-	$(location).attr('href', '/boardlist');
+	var kind_no = $('#kind_no').val();
+	$(location).attr('href', '/boardlist?kind_no='+kind_no);
 })
 </script>
 </head>
 <body>
-
+	<input id="kind_no" type="text" value="${kind_no }">
 </body>
 </html>

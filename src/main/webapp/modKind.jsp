@@ -63,6 +63,14 @@ label{
 						</div>
 						<h2 class="sub-header">게시판 등록</h2>
 						<div class="table-responsive">
+							<form action="/kindregist" method="POST">
+								<input name="kind_name" type="text" value="${kind.kind_name }">
+								<select name="kind_valid">
+									<option value="1">사용</option>
+									<option value="0">미사용</option>	
+								</select>
+								<input type="submit" value="신규 게시판 등록">
+							</form>
 						</div>
 					</div>
 				</div>

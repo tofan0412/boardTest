@@ -33,18 +33,28 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	<form method="post" action="/boardregist">
+	<form method="post" action="/boardregist" enctype="multipart/form-data">
 		제목 : <input type="text" name="board_title"><br><br>
 		게시판선택 
 		<select name="kind_no">
 			<c:forEach items="${menulist }" var="kind">
-				<option value="${kind.kind_no }">${kind.kind_name }</option>
+				<c:choose>
+					<c:when test="${kind.kind_valid == '1' }">
+						<option value="${kind.kind_no }">${kind.kind_name }</option>	
+					</c:when>
+				</c:choose>
 			</c:forEach>
 		</select>
 		
 		<br><br>
 		<textarea id="summernote" name="board_cont"></textarea>
 		<br>
+		<h3>파일첨부</h3>
+		<input type="file" name="img1" /><br>
+		<input type="file" name="img2" /><br>
+		<input type="file" name="img3" /><br>
+		<input type="file" name="img4" /><br>
+		<input type="file" name="img5" /><br>
 		<input type="submit" value="작성" style="float: right;">
 	</form>
 </body>

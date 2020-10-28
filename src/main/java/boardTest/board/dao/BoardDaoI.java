@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import boardTest.board.model.BoardVo;
+import boardTest.boardfile.model.BoardfileVo;
 
 public interface BoardDaoI {
 	// 특정 종류의 게시글을 모두 불러온다.
@@ -22,4 +23,11 @@ public interface BoardDaoI {
 	
 	// 게시글 삭제하기(속성값 변경)
 	public int delBoard(SqlSession sqlSession , String board_no);
+	
+	// 첨부파일 정보 저장하기
+	public int boardfileRegist(SqlSession sqlSession , BoardfileVo fileVo);
+	
+	// 첨부파일 정보 불러오기
+	public List<BoardfileVo> filelistRead(SqlSession sqlSession, String board_no);
+	
 }

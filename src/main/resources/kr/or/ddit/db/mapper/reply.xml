@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+	<select id="readReplyAll" parameterType="String" resultType="ReplyVo">
+		SELECT *
+		  FROM REPLY
+		 WHERE BOARD_NO = #{board_no}
+		 ORDER BY REPLY_NO ASC
+	</select>
+	
+	<update id="modReply" parameterType="ReplyVo">
+		UPDATE REPLY
+		   SET REPLY_CONT = #{reply_cont}
+		 WHERE REPLY_NO = #{reply_no}
+	</update>
+	
+	<delete id="delReply" parameterType="String">
+		DELETE FROM REPLY
+         WHERE REPLY_NO = #{reply_no}
+	</delete>	
+	
+	<insert id="replyRegist" parameterType="ReplyVo">
+		INSERT INTO REPLY(REPLY_NO, REPLY_CONT, REPLY_DATE ,BOARD_NO, USER_ID)
+		VALUES(REPLY_SEQ.NEXTVAL , #{reply_cont}, SYSDATE, #{board_no}, #{user_id})
+	</insert>
+	
+</mapper>

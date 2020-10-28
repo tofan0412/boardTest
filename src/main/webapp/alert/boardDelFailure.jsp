@@ -9,7 +9,7 @@
 <script type="text/javascript">
 $(function(){
 	alert("삭제 실패하였습니다. 다시 시도해 주세요.");
-	$(location).attr('href', '/boardlist');
+	$(location).attr('href', '/main.jsp');
 })
 </script>
 </head>

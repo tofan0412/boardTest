@@ -1,6 +1,7 @@
 package boardTest.kind.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -31,6 +32,32 @@ public class KindService implements KindServiceI{
 		List<KindVo> menulist = dao.roadMenuList(sqlSession);
 		sqlSession.close();
 		return menulist;
+	}
+
+	@Override
+	public int changeStatus(Map<String, String> map) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		int result = dao.changeStatus(sqlSession, map);
+		sqlSession.commit();
+		sqlSession.close();
+		return result;
+	}
+
+	@Override
+	public int kindRegist(KindVo kindVo) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		int result = dao.kindRegist(sqlSession, kindVo);
+		sqlSession.commit();
+		sqlSession.close();
+		return result;
+	}
+
+	@Override
+	public KindVo readKindOne(String kind_no) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		KindVo result = dao.readKindOne(sqlSession, kind_no);
+		sqlSession.close();
+		return result;
 	}
 
 }

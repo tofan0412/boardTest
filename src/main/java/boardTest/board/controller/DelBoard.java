@@ -30,14 +30,12 @@ public class DelBoard extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVo memberVo = (MemberVo)session.getAttribute("s_member");
 		
-		// 해당 글에 대한 권한이 없는 경우
-		if(!memberVo.getUser_id().equals(user_id)) {
-			request.getRequestDispatcher("/alert/authorizationAlert.jsp").forward(request, response);
-		}
-		
 		int result = service.delBoard(board_no);
 		
+		String kind_no = request.getParameter("kind_no");
 		request.setAttribute("board_no", board_no);
+		request.setAttribute("kind_no", kind_no);
+		
 		if (result > 0) {
 			request.getRequestDispatcher("/alert/boardDelSuccess.jsp").forward(request, response);
 		}else {

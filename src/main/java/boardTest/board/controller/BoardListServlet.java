@@ -25,6 +25,9 @@ public class BoardListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String kind_no = request.getParameter("kind_no");
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		service = BoardService.getService();
 		
 		List<BoardVo> boardlist = service.boardList(kind_no);

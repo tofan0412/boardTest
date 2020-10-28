@@ -16,7 +16,11 @@
 		<li class="active"><a href="${pageContext.request.contextPath}/main.jsp">Main <span class="sr-only">(current)</span></a></li>
 		<li class="active"><a href="/managekind">게시판 관리</a></li>
 		<c:forEach items="${menulist }" var="kind">
-			<li class="active"><a href="/boardlist?kind_no=${kind.kind_no }">${kind.kind_name }</a></li>
+			<c:choose>
+			<c:when test="${kind.kind_valid == '1' }">
+				<li class="active"><a href="/boardlist?kind_no=${kind.kind_no }">${kind.kind_name }</a></li>
+			</c:when>
+			</c:choose>
 		</c:forEach>
 	</ul>
 </body>
