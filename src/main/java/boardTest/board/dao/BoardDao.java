@@ -55,4 +55,9 @@ public class BoardDao implements BoardDaoI {
 		return sqlSession.selectList("board.filelistRead", board_no);
 	}
 
+	@Override
+	public int boardReplyRegist(SqlSession sqlSession, BoardVo boardVo) {
+		return sqlSession.insert("board.boardReplyRegist", boardVo);
+	}
+
 }

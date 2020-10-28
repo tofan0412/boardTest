@@ -30,4 +30,7 @@ public interface BoardDaoI {
 	// 첨부파일 정보 불러오기
 	public List<BoardfileVo> filelistRead(SqlSession sqlSession, String board_no);
 	
+	// 게시글에 대한 답글 작성하기
+	public int boardReplyRegist(SqlSession sqlSession , BoardVo boardVo);
+	
 }

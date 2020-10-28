@@ -76,7 +76,8 @@ $(function(){
 	// 답글 작성 함수
 	$('.replyBoatdBtn').on('click', function(){
 		var board_no = $(this).data('board_no'); 
-		$(location).attr('href', '/boardreply?board_no='+board_no);
+		var kind_no = $(this).data('kind_no'); 
+		$(location).attr('href', '/main_boardReplyRegist.jsp?board_no='+board_no+"&kind_no="+kind_no);
 	})
 })
 </script>
@@ -131,7 +132,9 @@ $(function(){
 									type="button" value="삭제" style="float: right;">
 							</c:if>
 							<c:if test="${BoardVo.user_id != s_member.user_id}">
-								<input class="replyBoatdBtn" data-board_no="${BoardVo.board_no }"
+								<input class="replyBoatdBtn" 
+								data-board_no="${BoardVo.board_no }"
+								data-kind_no="${BoardVo.kind_no }"
 									type="button" value="답글 쓰기" style="float: right;">
 							</c:if>
 						</div>

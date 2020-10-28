@@ -8,7 +8,7 @@ public class BoardVo {
 	private String board_cont; 
 	private Date board_date; 
 	private String board_delete; 
-	private String board_parentnum; 
+	private String board_parent_no; 
 	private String user_id; 
 	private String kind_no;
 		
@@ -42,11 +42,11 @@ public class BoardVo {
 	public void setBoard_delete(String board_delete) {
 		this.board_delete = board_delete;
 	}
-	public String getBoard_parentnum() {
-		return board_parentnum;
+	public String getBoard_parent_no() {
+		return board_parent_no;
 	}
-	public void setBoard_parentnum(String board_parentnum) {
-		this.board_parentnum = board_parentnum;
+	public void setBoard_parent_no(String board_parent_no) {
+		this.board_parent_no = board_parent_no;
 	}
 	public String getUser_id() {
 		return user_id;

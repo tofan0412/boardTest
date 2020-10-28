@@ -45,6 +45,21 @@ public class BoardService implements BoardServiceI{
 		// board_no에 시퀀스 값이 저장된다는 것이다.
 		return Integer.parseInt(boardVo.getBoard_no());
 	}
+	
+	// 게시글에 대한 답글 입력하는 메서드..
+	@Override
+	public int boardReplyRegist(BoardVo boardVo) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		int result = dao.boardReplyRegist(sqlSession, boardVo);
+		// 이 때 result는 개수를 불러온다.
+		if (result > 0) {
+			sqlSession.commit();
+		}
+		sqlSession.close();
+		// 주의해야 할 점은, xml 쿼리에서 selectKey를 적용하였기 때문에 들어간 파라미터의
+		// board_no에 시퀀스 값이 저장된다는 것이다.
+		return Integer.parseInt(boardVo.getBoard_no());
+	}
 
 	@Override
 	public BoardVo readBoard(String board_no) {
