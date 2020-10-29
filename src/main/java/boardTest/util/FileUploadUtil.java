@@ -1,5 +1,7 @@
 package boardTest.util;
 
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +46,17 @@ public class FileUploadUtil {
 		}
 	}
 	
-	
+	// 랜덤으로 입력한 수 길이 만큼의 문자열 만들기..
+	public static String randomAlphaWord(int wordLength) {
+		Random r = new Random();
+		StringBuilder sb = new StringBuilder(wordLength);
+
+		for(int i = 0; i < wordLength; i++) {
+			char tmp = (char) ('a' + r.nextInt('z' - 'a'));
+			sb.append(tmp);
+		}
+		return sb.toString();
+	}
 	
 	
 }

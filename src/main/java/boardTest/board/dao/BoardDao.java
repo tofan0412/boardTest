@@ -1,8 +1,10 @@
+
 package boardTest.board.dao;
 
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
 import org.apache.ibatis.session.SqlSession;
 
 import boardTest.board.model.BoardVo;
@@ -23,6 +25,11 @@ public class BoardDao implements BoardDaoI {
 	@Override
 	public List<BoardVo> boardList(SqlSession sqlSession, String kind_no) {
 		return sqlSession.selectList("board.boardlist", kind_no);
+	}
+	
+	@Override
+	public List<BoardVo> boardListPage(SqlSession sqlSession, Map<String, String> map) {
+		return sqlSession.selectList("board.boardListPage", map);
 	}
 
 	@Override
@@ -58,6 +65,21 @@ public class BoardDao implements BoardDaoI {
 	@Override
 	public int boardReplyRegist(SqlSession sqlSession, BoardVo boardVo) {
 		return sqlSession.insert("board.boardReplyRegist", boardVo);
+	}
+
+	@Override
+	public int delFilelist(SqlSession sqlSession, String board_no) {
+		return sqlSession.delete("board.delFilelist", board_no);
+	}
+
+	@Override
+	public int delFileOne(SqlSession sqlSession, String file_no) {
+		return sqlSession.delete("board.delFileOne", file_no);
+	}
+
+	@Override
+	public BoardfileVo readFileOne(SqlSession sqlSession, String file_no) {
+		return sqlSession.selectOne("board.readFileOne", file_no);
 	}
 
 }

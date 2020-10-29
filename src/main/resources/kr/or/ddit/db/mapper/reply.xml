@@ -7,7 +7,7 @@
 		SELECT *
 		  FROM REPLY
 		 WHERE BOARD_NO = #{board_no}
-		 ORDER BY REPLY_NO ASC
+		 ORDER BY REPLY_DATE ASC
 	</select>
 	
 	<update id="modReply" parameterType="ReplyVo">

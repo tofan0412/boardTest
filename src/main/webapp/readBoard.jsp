@@ -97,6 +97,9 @@ $(function(){
 						<div id="header">
 							<input id="board_no" type="text" readonly value="${BoardVo.board_no }" hidden="hidden">
 							<input id="kind_no" type="text" readonly value="${BoardVo.kind_no }" hidden="hidden">
+<%-- 							<c:if test="${BoardVo.board_parent_no ne null }"> --%>
+<%-- 								**${BoardVo.board_parent_no }에 대한 답글입니다. --%>
+<%-- 							</c:if> --%>
 							<label class="board"><h1>${BoardVo.board_title }</h1></label><br>
 							<br> <label class="board">작성자
 								<h4 id="user_id" data-user_id="${BoardVo.user_id}">${BoardVo.user_id}</h4>

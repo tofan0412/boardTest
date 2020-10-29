@@ -131,5 +131,28 @@ public class BoardTest {
 		assertEquals(5, filelist.size());
 	}
 	
+	@Test
+	public void delFileOneTest() {
+		/***Given***/
+		String file_no = "16";
 
+		/***When***/
+		int result = service.delFileOne(file_no);
+		
+		/***Then***/
+		assertEquals(1, result);
+	}
+	
+	@Test
+	public void readFileOneTest() { 
+		/***Given***/
+		String file_no = "32";
+		
+		/***When***/
+		BoardfileVo fileVo = service.readFileOne(file_no);
+		/***Then***/
+		assertEquals("cony.png", fileVo.getRealfilename());
+		
+	}
+	
 }

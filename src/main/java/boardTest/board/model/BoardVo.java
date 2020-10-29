@@ -11,7 +11,14 @@ public class BoardVo {
 	private String board_parent_no; 
 	private String user_id; 
 	private String kind_no;
+	private String board_level;
 		
+	public String getBoard_level() {
+		return board_level;
+	}
+	public void setBoard_level(String board_level) {
+		this.board_level = board_level;
+	}
 	public String getBoard_no() {
 		return board_no;
 	}

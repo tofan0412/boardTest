@@ -33,7 +33,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	<form method="post" action="/boardregist" enctype="multipart/form-data">
+	<form method="POST" action="/boardregist" enctype="multipart/form-data">
 		제목 : <input type="text" name="board_title"><br><br>
 		게시판선택 
 		<select name="kind_no">

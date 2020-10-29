@@ -18,7 +18,7 @@
 		<c:forEach items="${menulist }" var="kind">
 			<c:choose>
 			<c:when test="${kind.kind_valid == '1' }">
-				<li class="active"><a href="/boardlist?kind_no=${kind.kind_no }">${kind.kind_name }</a></li>
+				<li class="active"><a href="/boardlist?kind_no=${kind.kind_no }&kind_name=${kind.kind_name}">${kind.kind_name }</a></li>
 			</c:when>
 			</c:choose>
 		</c:forEach>

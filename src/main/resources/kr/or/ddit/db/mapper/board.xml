@@ -3,11 +3,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
+	
 	<select id="boardlist" resultType="BoardVo" parameterType="String">
 		SELECT *
 		  FROM board
 		 WHERE KIND_NO = #{kind_no}
 	     ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 페이징을 이용하여 특정 페이지의 글만 불러오기.. -->
+	<select id="boardListPage" parameterType="map" resultType="BoardVo">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_DATE, USER_ID, BOARD_DELETE, BOARD_LEVEL
+          FROM (SELECT CONNECT_BY_ROOT(BOARD_NO) GN,
+                       ROWNUM AS RN,
+                       BOARD_NO,
+                       LPAD(' ',(LEVEL-1)*4)||BOARD_TITLE AS BOARD_TITLE,
+                       BOARD_DATE AS BOARD_DATE,
+                       BOARD_DELETE,
+                       USER_ID AS USER_ID,
+                       LEVEL AS BOARD_LEVEL
+                  FROM (SELECT ROWNUM AS RN, A.*
+		                  FROM (SELECT *
+		                          FROM BOARD
+		                         WHERE KIND_NO = #{kind_no}
+		                         ORDER BY BOARD_NO DESC) A) B
+                           WHERE B.RN BETWEEN ((#{page} -1)*#{pageSize}) + 1 AND #{page}*#{pageSize} 
+                 START WITH BOARD_PARENT_NO IS NULL
+               CONNECT BY PRIOR BOARD_NO = BOARD_PARENT_NO
+                 ORDER BY GN DESC, BOARD_NO ASC) C
 	</select>
 	
 	<insert id="boardReplyRegist" parameterType="BoardVo">
@@ -63,6 +86,22 @@
 		  FROM BOARDFILE
 		 WHERE BOARD_NO = #{board_no}
 	</select>
+
+	<delete id="delFilelist" parameterType="String">
+		DELETE FROM BOARDFILE
+		WHERE BOARD_NO = #{board_no}
+	</delete>
 	
+	<!-- 파일 번호 이용해서 하나의 파일만 지우기.. -->
+	<delete id="delFileOne" parameterType="String">
+		DELETE FROM BOARDFILE
+		WHERE FILE_NO = #{FILE_NO}
+	</delete>
 	
+	<!-- 파일 번호 이용해서 하나의 파일 객체 얻어오기 -->
+	<select id="readFileOne" parameterType="String" resultType="FileVo">
+		SELECT *
+		  FROM BOARDFILE
+		 WHERE FILE_NO = #{file_no}
+	</select>
 </mapper>

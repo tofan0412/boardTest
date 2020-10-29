@@ -24,7 +24,7 @@ $(document).ready(function() {
 		  maxHeight: 600,              	// 최대 높이
 		  focus: true,                 	// 에디터 로딩후 포커스를 맞출지 여부
 		  lang: "ko-KR",			   	// 한글 설정
-		  placeholder: '글을 작성해주세요. 최대 2048자까지 입력 가능합니다.'
+		  placeholder: '글을 작성해주세요. 최대 2048자까지 입력 가능합니다. - 답글 작성'
 		  //placeholder 설정
 	});
 });
@@ -36,7 +36,7 @@ $(document).ready(function() {
 		<input type="text" name="board_no" value="${param.board_no }" readonly hidden="hidden">
 		<input type="text" name="kind_no" value="${param.kind_no }" readonly hidden="hidden">
 		<br><br>
-		<textarea id="summernote" name="board_cont"></textarea>
+		<textarea class="textarea" id="summernote" name="board_cont"></textarea>
 		<br>
 		<h3>파일첨부</h3>
 		<input type="file" name="img1" /><br>

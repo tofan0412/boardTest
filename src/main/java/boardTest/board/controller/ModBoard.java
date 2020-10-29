@@ -1,6 +1,8 @@
 package boardTest.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import boardTest.board.model.BoardVo;
 import boardTest.board.service.BoardService;
 import boardTest.board.service.BoardServiceI;
+import boardTest.boardfile.model.BoardfileVo;
 import boardTest.member.model.MemberVo;
 
 @WebServlet("/modboard")
@@ -38,6 +41,10 @@ public class ModBoard extends HttpServlet {
 		
 		BoardVo boardVo = service.readBoard(board_no);
 		
+		// 해당 게시글의 첨부 파일 목록 불러오기..
+		List<BoardfileVo> filelist = service.filelistRead(board_no);
+		
+		request.setAttribute("filelist", filelist);
 		request.setAttribute("BoardVo", boardVo);
 		request.getRequestDispatcher("/main_boardMod.jsp").forward(request, response);
 	}

@@ -29,16 +29,45 @@ $(document).ready(function() {
 		  placeholder: '글을 작성해주세요. 최대 2048자까지 입력 가능합니다.'
 		  //placeholder 설정
 	});
+
+	$('.submit').on('click', function(){
+		var file_no = $(this).data('file_no');
+		var board_no = $(this).data('board_no');
+		var board_title = $(this).data('board_title');
+		
+		var board_cont = $(this).data('board_cont');
+		$(location).attr('href', "/delfileone?file_no="+file_no+"&board_no="+board_no+"&board_title="+board_title+"&board_cont="+board_cont);
+	})
 });
 </script>
 </head>
 <body>
-	<form method="post" action="/modboard2?board_no=${BoardVo.board_no}">
+	<form method="POST" action="/modboard2" enctype="multipart/form-data">
+		<input type="text" name="board_no" readonly value="${BoardVo.board_no}" hidden="hidden">
 		제목 : <input type="text" name="board_title" value="${BoardVo.board_title}">
 		<br><br><br>
 		<textarea id="summernote" name="board_cont">${BoardVo.board_cont }</textarea>
 		<br>
+		
+		<h3>신규 첨부 파일 등록</h3>
+		<input type="file" name="img1" /><br>
+		<input type="file" name="img2" /><br>
+		<input type="file" name="img3" /><br>
+		<input type="file" name="img4" /><br>
+		<input type="file" name="img5" /><br>
 		<input type="submit" value="작성" style="float: right;">
 	</form>
+	
+	<h3>첨부 파일 수정</h3>
+	<c:forEach items="${filelist }" var="fileVo">
+		${fileVo.realfilename }
+		<input class="submit" type="button" 
+		data-board_no="${BoardVo.board_no }"
+		data-board_title="${BoardVo.board_title }"
+		data-board_cont="${BoardVo.board_cont }"
+		data-file_no="${fileVo.file_no }"
+		value="파일 삭제하기">
+		<br>
+	</c:forEach>
 </body>
 </html>

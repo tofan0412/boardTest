@@ -10,6 +10,9 @@ public interface BoardServiceI {
 	// 특정 종류의 게시글을 모두 불러온다.
 	public List<BoardVo> boardList(String kind_no);
 	
+	// 페이징을 이용하여 글 목록 불러오기
+	public List<BoardVo> boardListPage(Map<String, String> map);
+	
 	// 작성한 게시글 등록하기
 	public int boardRegist(BoardVo boardVo);
 	
@@ -27,6 +30,15 @@ public interface BoardServiceI {
 	
 	// 첨부파일 정보 불러오기
 	public List<BoardfileVo> filelistRead(String board_no);
+	
+	// 게시글 번호 이용해서 해당글의 첨부파일 모두 지우기
+	public int delFilelist(String board_no);
+	
+	// 파일 번호 이용해서 하나의 첨부파일 객체 얻기
+	public BoardfileVo readFileOne(String file_no);
+	
+	// 파일 번호 이용해서 하나의 첨부파일 지우기
+	public int delFileOne(String file_no);
 	
 	// 게시글에 대한 답글 작성하기
 	public int boardReplyRegist(BoardVo boardVo);

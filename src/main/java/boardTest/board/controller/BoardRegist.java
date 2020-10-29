@@ -44,9 +44,9 @@ public class BoardRegist extends HttpServlet {
 		MemberVo memberVo = (MemberVo)session.getAttribute("s_member");
 
 		String user_id = memberVo.getUser_id();
-		String board_title = request.getParameter("board_title");
 		String kind_no = request.getParameter("kind_no");
-		String board_cont = request.getParameter("board_title");
+		String board_title = request.getParameter("board_title");
+		String board_cont = request.getParameter("board_cont");
 		
 		logger.debug("받아온 Board 파라미터들!! : user_id : {} board_title : {} , kind_no : {}, board_cont : {}",
 						user_id, board_title, kind_no, board_cont);

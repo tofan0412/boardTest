@@ -31,6 +31,14 @@ public class BoardService implements BoardServiceI{
 		sqlSession.close();
 		return boardlist;
 	}
+	
+	@Override
+	public List<BoardVo> boardListPage(Map<String, String> map) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		List<BoardVo> boardlist = dao.boardListPage(sqlSession, map);
+		sqlSession.close();
+		return boardlist;
+	}
 
 	@Override
 	public int boardRegist(BoardVo boardVo) {
@@ -51,7 +59,7 @@ public class BoardService implements BoardServiceI{
 	public int boardReplyRegist(BoardVo boardVo) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSession();
 		int result = dao.boardReplyRegist(sqlSession, boardVo);
-		// 이 때 result는 개수를 불러온다.
+		// 이 때 result는 처리한 작업의 수를 불러온다.
 		if (result > 0) {
 			sqlSession.commit();
 		}
@@ -110,4 +118,30 @@ public class BoardService implements BoardServiceI{
 		return filelist;
 	}
 
+	@Override
+	public int delFilelist(String board_no) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		int result = dao.delFilelist(sqlSession, board_no);
+		// 애초에 해당 글의 첨부파일 목록이 없을 수도 있다..
+		sqlSession.commit();
+		sqlSession.close();
+		return result;
+	}
+
+	@Override
+	public int delFileOne(String file_no) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		int result = dao.delFileOne(sqlSession, file_no);
+		if (result > 0) sqlSession.commit();
+		sqlSession.close();
+		return result;
+	}
+
+	@Override
+	public BoardfileVo readFileOne(String file_no) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		BoardfileVo result = dao.readFileOne(sqlSession, file_no);
+		sqlSession.close();
+		return result;
+	}
 }
