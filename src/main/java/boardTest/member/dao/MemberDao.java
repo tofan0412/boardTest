@@ -2,24 +2,21 @@ package boardTest.member.dao;
 
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 import boardTest.member.model.MemberVo;
 
+@Repository("memberDao")
 public class MemberDao implements MemberDaoI {
-	private static MemberDaoI dao;
 	
-	private MemberDao() {
-		
-	}
-	
-	public static MemberDaoI getDao() {
-		if (dao == null) dao = new MemberDao();
-		return dao;
-	}
+	@Resource(name="SqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public MemberVo login(SqlSession sqlSession, Map<String, String> map) {
+	public MemberVo login(Map<String, String> map) {
 		return sqlSession.selectOne("member.login", map);
 	}
 

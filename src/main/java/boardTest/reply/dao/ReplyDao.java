@@ -2,40 +2,36 @@ package boardTest.reply.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 import boardTest.reply.model.ReplyVo;
 
+@Repository("replyDao")
 public class ReplyDao implements ReplyDaoI{
-	private static ReplyDaoI dao;
 	
-	private ReplyDao() {
-		
-	}
-	
-	public static ReplyDaoI getDao() {
-		if (dao == null) dao = new ReplyDao();
-		return dao;
-	}
+	@Resource(name="SqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ReplyVo> readReplyAll(SqlSession sqlSession, String board_no) {
+	public List<ReplyVo> readReplyAll(String board_no) {
 		return sqlSession.selectList("reply.readReplyAll", board_no);
 	}
 
 	@Override
-	public int modReply(SqlSession sqlSession, ReplyVo replyVo) {
+	public int modReply(ReplyVo replyVo) {
 		return sqlSession.update("reply.modReply", replyVo);
 	}
 
 	@Override
-	public int delReply(SqlSession sqlSession, String reply_no) {
+	public int delReply(String reply_no) {
 		return sqlSession.delete("reply.delReply", reply_no);
 	}
 
 	@Override
-	public int replyRegist(SqlSession sqlSession, ReplyVo replyVo) {
+	public int replyRegist(ReplyVo replyVo) {
 		return sqlSession.insert("reply.replyRegist", replyVo);
 	}
-	
 }

@@ -8,5 +8,5 @@ import boardTest.member.model.MemberVo;
 
 public interface MemberDaoI {
 	// 로그인 메서드
-	public MemberVo login(SqlSession sqlSession , Map<String, String> map);
+	public MemberVo login(Map<String, String> map);
 }

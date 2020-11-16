@@ -1,27 +1,20 @@
 package boardTest.boardfile.dao;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 import boardTest.boardfile.model.BoardfileVo;
 
+@Repository("fileDao")
 public class FileDao implements FileDaoI{
-	private static FileDaoI dao;
 	
-	private FileDao() {
-		
-	}
+	@Resource(name="SqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
 	
-	public static FileDaoI getDao() {
-		if (dao == null) dao = new FileDao();
-		return dao;
-	}
-
 	@Override
-	public BoardfileVo readFile(SqlSession sqlSession, String file_no) {
+	public BoardfileVo readFile(String file_no) {
 		return sqlSession.selectOne("file.readFile", file_no);
 	}
-	
-	
-	
-	
 }

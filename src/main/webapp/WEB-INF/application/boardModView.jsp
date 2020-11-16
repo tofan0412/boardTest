@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
+
 <title>게시글 작성</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -29,20 +19,11 @@ $(document).ready(function() {
 		  placeholder: '글을 작성해주세요. 최대 2048자까지 입력 가능합니다.'
 		  //placeholder 설정
 	});
-
-	$('.submit').on('click', function(){
-		var file_no = $(this).data('file_no');
-		var board_no = $(this).data('board_no');
-		var board_title = $(this).data('board_title');
-		
-		var board_cont = $(this).data('board_cont');
-		$(location).attr('href', "/delfileone?file_no="+file_no+"&board_no="+board_no+"&board_title="+board_title+"&board_cont="+board_cont);
-	})
 });
 </script>
 </head>
 <body>
-	<form method="POST" action="/modboard2" enctype="multipart/form-data">
+	<form method="POST" action="/board/modBoard" enctype="multipart/form-data">
 		<input type="text" name="board_no" readonly value="${BoardVo.board_no}" hidden="hidden">
 		제목 : <input type="text" name="board_title" value="${BoardVo.board_title}">
 		<br><br><br>
@@ -59,15 +40,17 @@ $(document).ready(function() {
 	</form>
 	
 	<h3>첨부 파일 수정</h3>
+	
 	<c:forEach items="${filelist }" var="fileVo">
-		${fileVo.realfilename }
-		<input class="submit" type="button" 
-		data-board_no="${BoardVo.board_no }"
-		data-board_title="${BoardVo.board_title }"
-		data-board_cont="${BoardVo.board_cont }"
-		data-file_no="${fileVo.file_no }"
-		value="파일 삭제하기">
-		<br>
+		<form action="/delfileone" method="GET">
+			${fileVo.realfilename }
+			<input type="text" name="board_no" value="${BoardVo.board_no }" hidden="hidden">
+		    <input type="text" name="board_title" value="${BoardVo.board_title }" hidden="hidden">
+			<textarea id="summernote" name="board_cont" hidden="hidden">${BoardVo.board_cont }</textarea>
+			<input type="text" name="file_no" value="${fileVo.file_no }" hidden="hidden">
+			<input class="submit" type="submit" value="삭제">
+			<br>
+		</form>
 	</c:forEach>
 </body>
 </html>

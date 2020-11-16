@@ -3,39 +3,37 @@ package boardTest.kind.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 import boardTest.kind.model.KindVo;
 
+@Repository("kindDao")
 public class KindDao implements KindDaoI{
-	private static KindDaoI dao;
 	
-	private KindDao() {
-		
-	}
+	@Resource(name="SqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
 	
-	public static KindDaoI getDao() {
-		if (dao == null) dao = new KindDao();
-		return dao;
-	}
 	
 	@Override
-	public List<KindVo> roadMenuList(SqlSession sqlSession) {
+	public List<KindVo> roadMenuList() {
 		return sqlSession.selectList("kind.roadMenuList");
 	}
 
 	@Override
-	public int changeStatus(SqlSession sqlSession, Map<String, String> map) {
+	public int changeStatus(Map<String, String> map) {
 		return sqlSession.update("kind.changeStatus", map);
 	}
 
 	@Override
-	public int kindRegist(SqlSession sqlSession, KindVo kindVo) {
+	public int kindRegist(KindVo kindVo) {
 		return sqlSession.insert("kind.kindRegist", kindVo);
 	}
 
 	@Override
-	public KindVo readKindOne(SqlSession sqlSession, String kind_no) {
+	public KindVo readKindOne(String kind_no) {
 		return sqlSession.selectOne("kind.readKindOne", kind_no);
 	}
 

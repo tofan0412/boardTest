@@ -1,7 +1,6 @@
 package boardTest.reply.service;
 
 import java.util.List;
-import java.util.Map;
 
 import boardTest.reply.model.ReplyVo;
 

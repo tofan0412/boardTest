@@ -3,61 +3,36 @@ package boardTest.kind.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.annotation.Resource;
 
-import boardTest.DB.MyBatisUtil;
-import boardTest.kind.dao.KindDao;
+import org.springframework.stereotype.Service;
+
 import boardTest.kind.dao.KindDaoI;
 import boardTest.kind.model.KindVo;
 
+@Service("kindService")
 public class KindService implements KindServiceI{
-	private static KindServiceI service;
+	@Resource(name="kindDao")
 	private KindDaoI dao;
-	
-	private KindService() {
-		dao = KindDao.getDao();
-	}
-	
-	public static KindServiceI getService() {
-		if (service == null) {
-			service = new KindService();
-		}
-		return service;
-	}
-	
 	
 	@Override
 	public List<KindVo> roadMenuList() {
-		SqlSession sqlSession = MyBatisUtil.getSqlSession();
-		List<KindVo> menulist = dao.roadMenuList(sqlSession);
-		sqlSession.close();
-		return menulist;
+		return dao.roadMenuList();
 	}
 
 	@Override
-	public int changeStatus(Map<String, String> map) {
-		SqlSession sqlSession = MyBatisUtil.getSqlSession();
-		int result = dao.changeStatus(sqlSession, map);
-		sqlSession.commit();
-		sqlSession.close();
-		return result;
+	public int changeStatus(Map<String, String> kindInfo) {
+		return dao.changeStatus(kindInfo);
 	}
 
 	@Override
 	public int kindRegist(KindVo kindVo) {
-		SqlSession sqlSession = MyBatisUtil.getSqlSession();
-		int result = dao.kindRegist(sqlSession, kindVo);
-		sqlSession.commit();
-		sqlSession.close();
-		return result;
+		return dao.kindRegist(kindVo);
 	}
 
 	@Override
 	public KindVo readKindOne(String kind_no) {
-		SqlSession sqlSession = MyBatisUtil.getSqlSession();
-		KindVo result = dao.readKindOne(sqlSession, kind_no);
-		sqlSession.close();
-		return result;
+		return dao.readKindOne(kind_no);
 	}
 
 }

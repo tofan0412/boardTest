@@ -9,7 +9,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-<!--     <link rel="icon" href="../../favicon.ico"> -->
+    <link rel="icon" href="../../favicon.ico">
 	
     <title>Signin Template for Bootstrap</title>
 	
@@ -80,12 +80,12 @@
 
     <div class="container">
 
-      <form class="form-signin" action="${pageContext.request.contextPath}/login" method="POST">
+      <form class="form-signin" action="/board/login" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="user_id" name="user_id" class="form-control" placeholder="Email address" required autofocus value="brown">
+        <input type="email" id="email" name="userId" class="form-control" placeholder="Email address" required autofocus value="brown">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="user_pass" name="user_pass" class="form-control" placeholder="Password" required value="brownPass">
+        <input type="password" id="namepassword" name="password" class="form-control" placeholder="Password" required value="brownPass">
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
