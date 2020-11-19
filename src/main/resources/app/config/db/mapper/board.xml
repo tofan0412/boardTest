@@ -13,9 +13,8 @@
 	
 	<!-- 페이징을 이용하여 특정 페이지의 글만 불러오기.. -->
 	<select id="boardListPage" parameterType="map" resultType="BoardVo">
-		SELECT BOARD_NO, BOARD_TITLE, BOARD_DATE, USER_ID, BOARD_DELETE, BOARD_LEVEL
-          FROM (SELECT CONNECT_BY_ROOT(BOARD_NO) GN,
-                       ROWNUM AS RN,
+        SELECT BOARD_NO, BOARD_TITLE, BOARD_DATE, USER_ID, BOARD_DELETE, BOARD_LEVEL
+          FROM (SELECT ROWNUM AS RN,
                        BOARD_NO,
                        LPAD(' ',(LEVEL-1)*4)||BOARD_TITLE AS BOARD_TITLE,
                        BOARD_DATE AS BOARD_DATE,
@@ -25,12 +24,11 @@
                   FROM (SELECT ROWNUM AS RN, A.*
 		                  FROM (SELECT *
 		                          FROM BOARD
-		                         WHERE KIND_NO = #{kind_no}
-		                         ORDER BY BOARD_NO DESC) A) B
-                           WHERE B.RN BETWEEN ((#{page} -1)*#{pageSize}) + 1 AND #{page}*#{pageSize} 
+		                         WHERE KIND_NO = #{kind_no}) A) B
                  START WITH BOARD_PARENT_NO IS NULL
                CONNECT BY PRIOR BOARD_NO = BOARD_PARENT_NO
-                 ORDER BY GN DESC, BOARD_NO ASC) C
+                 ORDER SIBLINGS BY BOARD_DATE DESC) C
+         WHERE C.RN BETWEEN ((#{page} -1)*#{pageSize}) + 1 AND #{page}*#{pageSize}
 	</select>
 	
 	<insert id="boardReplyRegist" parameterType="BoardVo">
@@ -42,7 +40,7 @@
 		INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONT,
 		                  BOARD_DATE, BOARD_DELETE,
 		                  USER_ID, KIND_NO, BOARD_PARENT_NO)
-		VALUES(board_seq.nextval, #{board_title}, #{board_cont},SYSDATE, '1', #{user_id}, #{kind_no}, #{board_parent_no})                 
+		VALUES(BOARD_SEQ.NEXTVAL, #{board_title}, #{board_cont},SYSDATE, '1', #{user_id}, #{kind_no}, #{board_parent_no})                 
 	</insert>
 	
 	<insert id="boardRegist" parameterType="BoardVo">

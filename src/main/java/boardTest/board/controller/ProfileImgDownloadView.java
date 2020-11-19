@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.view.AbstractView;
 
-import boardTest.member.model.MemberVo;
-
 public class ProfileImgDownloadView extends AbstractView {
 
 	@Override

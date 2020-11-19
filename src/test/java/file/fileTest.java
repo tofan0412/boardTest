@@ -2,35 +2,36 @@ package file;
 
 import static org.junit.Assert.*;
 
+import javax.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import boardTest.boardfile.dao.FileDao;
 import boardTest.boardfile.dao.FileDaoI;
 import boardTest.boardfile.model.BoardfileVo;
-import boardTest.boardfile.service.FileService;
 import boardTest.boardfile.service.FileServiceI;
+import test.config.ModelTestConfig;
 
-public class fileTest {
+public class fileTest extends ModelTestConfig{
+	@Resource(name="fileService")
 	FileServiceI service;
+	@Resource(name="fileDao")
 	FileDaoI dao;
 	
 	@Before
 	public void setup() {
-		service = FileService.getService();
-		dao = FileDao.getDao();
 	}
 	
 	
 	@Test
 	public void readFiletest() {
 		/***Given***/
-		String file_no = "1";
+		String file_no = "41";
 
 		/***When***/
 		BoardfileVo result = service.readFile(file_no);
 		/***Then***/
-		assertEquals("brown.png", result.getRealfilename());
+		assertEquals("cony.png", result.getRealfilename());
 		
 		
 	}

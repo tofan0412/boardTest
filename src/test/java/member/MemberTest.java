@@ -5,24 +5,24 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import boardTest.member.dao.MemberDao;
 import boardTest.member.dao.MemberDaoI;
 import boardTest.member.model.MemberVo;
-import boardTest.member.service.MemberService;
 import boardTest.member.service.MemberServiceI;
+import test.config.ModelTestConfig;
 
-public class MemberTest {
+public class MemberTest extends ModelTestConfig{
+	@Resource(name="memberService")
 	MemberServiceI service;
+	@Resource(name="memberDao")
 	MemberDaoI dao;
 	
 	@Before
 	public void setup() {
-		service = MemberService.getService();
-		dao = MemberDao.getDao();
 	}
 	
 	@Test

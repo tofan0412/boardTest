@@ -8,7 +8,6 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
 	rel="stylesheet">
-
 <script type="text/javascript">
 $(document).ready(function() {
 	//여기 아래 부분
@@ -18,42 +17,24 @@ $(document).ready(function() {
 		  maxHeight: 600,              	// 최대 높이
 		  focus: true,                 	// 에디터 로딩후 포커스를 맞출지 여부
 		  lang: "ko-KR",			   	// 한글 설정
-		  placeholder: '글을 작성해주세요. 최대 2048자까지 입력 가능합니다.'
+		  placeholder: '글을 작성해주세요. 최대 2048자까지 입력 가능합니다. - 답글 작성'
 		  //placeholder 설정
 	});
 });
 </script>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-	<h2 class="sub-header">게시글 작성</h2>
-	<form method="POST" action="/board/modBoard"
-		enctype="multipart/form-data">
-		<input type="text" name="board_no" readonly value="${BoardVo.board_no}"
-			hidden="hidden"> 제목 : <input type="text" name="board_title"
-			value="${BoardVo.board_title}"> <br>
+	<form method="post" action="/board/boardReply" enctype="multipart/form-data">
+		답글 제목 : <input type="text" name="board_title"> <input
+			type="text" name="board_no" value="${param.board_no }" readonly
+			hidden="hidden"> <input type="text" name="kind_no"
+			value="${param.kind_no }" readonly hidden="hidden"> <br>
 		<br>
+		<textarea class="textarea" id="summernote" name="board_cont"></textarea>
 		<br>
-		<textarea id="summernote" name="board_cont">${BoardVo.board_cont }</textarea>
-		<br>
-	
-		<h3>신규 첨부 파일 등록</h3>
+		<h3>파일첨부</h3>
 		<input type="file" name="img1" /><br> <input type="file"
 			name="img2" /><br> <input type="file" name="img3" /><br> <input
 			type="file" name="img4" /><br> <input type="file" name="img5" /><br>
 		<input type="submit" value="작성" style="float: right;">
 	</form>
-	
-	<h3>첨부 파일 수정</h3>
-	
-	<c:forEach items="${filelist }" var="fileVo">
-		<form action="/board/delFileOne" method="GET">
-			${fileVo.realfilename } <input type="text" name="board_no"
-				value="${BoardVo.board_no }" hidden="hidden"> <input
-				type="text" name="board_title" value="${BoardVo.board_title }"
-				hidden="hidden">
-			<textarea id="summernote" name="board_cont" hidden="hidden">${BoardVo.board_cont }</textarea>
-			<input type="text" name="file_no" value="${fileVo.file_no }"
-				hidden="hidden"> <input class="submit" type="submit"
-				value="삭제"> <br>
-		</form>
-	</c:forEach>
 </div>

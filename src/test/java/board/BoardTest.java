@@ -6,26 +6,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import boardTest.board.dao.BoardDao;
 import boardTest.board.dao.BoardDaoI;
 import boardTest.board.model.BoardVo;
-import boardTest.board.service.BoardService;
 import boardTest.board.service.BoardServiceI;
 import boardTest.boardfile.model.BoardfileVo;
+import test.config.ModelTestConfig;
 
-public class BoardTest {
+
+public class BoardTest extends ModelTestConfig{
+	@Resource(name="boardService")
 	BoardServiceI service;
+	@Resource(name="boardDao")
 	BoardDaoI dao;
 	
 	@Before
 	public void setup() {
-		service = BoardService.getService();
-		dao = BoardDao.getDao();
+		super.setup();
 	}
-	
 	
 	@Test
 	public void boardlistTest() {
@@ -35,8 +37,7 @@ public class BoardTest {
 		/***When***/
 		List<BoardVo> boardlist = service.boardList(kind_no);
 		/***Then***/
-		assertEquals(1, boardlist.size());
-		
+		assertEquals(68, boardlist.size());
 	}
 	
 	@Test
@@ -56,10 +57,10 @@ public class BoardTest {
 
 		/***When***/
 		int result = service.boardRegist(boardVo);
-		
+		// 현재 시퀀스 값을 반환한다.
 		/***Then***/
 		// result는 현재 sequence 값을 가져온다.
-		assertEquals(1, result);
+		assertEquals(110, result);
 	}
 	
 	@Test
@@ -123,7 +124,7 @@ public class BoardTest {
 	@Test
 	public void filelistReadTest() {
 		/***Given***/
-		String board_no = "37";
+		String board_no = "70";
 
 		/***When***/
 		List<BoardfileVo> filelist = service.filelistRead(board_no);
@@ -134,7 +135,7 @@ public class BoardTest {
 	@Test
 	public void delFileOneTest() {
 		/***Given***/
-		String file_no = "16";
+		String file_no = "41";
 
 		/***When***/
 		int result = service.delFileOne(file_no);
@@ -146,13 +147,12 @@ public class BoardTest {
 	@Test
 	public void readFileOneTest() { 
 		/***Given***/
-		String file_no = "32";
+		String file_no = "41";
 		
 		/***When***/
 		BoardfileVo fileVo = service.readFileOne(file_no);
 		/***Then***/
 		assertEquals("cony.png", fileVo.getRealfilename());
-		
 	}
 	
 }

@@ -6,24 +6,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import boardTest.kind.dao.KindDao;
 import boardTest.kind.dao.KindDaoI;
 import boardTest.kind.model.KindVo;
-import boardTest.kind.service.KindService;
 import boardTest.kind.service.KindServiceI;
-import junit.extensions.TestSetup;
+import test.config.ModelTestConfig;
 
-public class KindTest {
+public class KindTest extends ModelTestConfig{
+	@Resource(name="kindService")
 	KindServiceI service;
+	@Resource(name="kindDao")
 	KindDaoI dao;
 	
 	@Before
 	public void Setup() {
-		service = KindService.getService();
-		dao = KindDao.getDao();
 	}
 	
 	@Test
@@ -33,7 +33,7 @@ public class KindTest {
 		/***When***/
 		List<KindVo> menu = service.roadMenuList();
 		/***Then***/
-		assertEquals(4, menu.size());
+		assertEquals(8, menu.size());
 	}
 	
 	@Test

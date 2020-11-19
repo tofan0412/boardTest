@@ -5,8 +5,8 @@
 <configuration>
 
   <typeAliases>
-  	<typeAlias type="boardTest.member.model.MemberVo" alias="MemberVo"/>
   	<typeAlias type="boardTest.board.model.BoardVo" alias="BoardVo"/>
+  	<typeAlias type="boardTest.member.model.MemberVo" alias="MemberVo"/>
   	<typeAlias type="boardTest.boardfile.model.BoardfileVo" alias="FileVo"/>
   	<typeAlias type="boardTest.kind.model.KindVo" alias="KindVo"/>
   	<typeAlias type="boardTest.reply.model.ReplyVo" alias="ReplyVo"/>

@@ -5,12 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
-import boardTest.DB.MyBatisUtil;
-import boardTest.board.dao.BoardDao;
 import boardTest.board.dao.BoardDaoI;
 import boardTest.board.model.BoardVo;
 import boardTest.boardfile.model.BoardfileVo;

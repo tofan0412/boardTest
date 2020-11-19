@@ -23,13 +23,9 @@
 	</insert>
 	
 	<!--  테스트 코드용. 하나의 게시판 객체를 불러온다. -->
-	<select id="readKindOne" parameterType="String">
+	<select id="readKindOne" parameterType="String" resultType="KindVo">
 		SELECT *
 		  FROM KIND
 		 WHERE KIND_NO = #{kind_no}
 	</select>
-	
-	
-	
-	
 </mapper>

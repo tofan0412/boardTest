@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-<properties>
+	<properties>
 		<!-- 사용자가 직접 정의해서 사용할 수 있다. -->
 		<spring.version>4.3.29.RELEASE</spring.version>
 	</properties>
@@ -149,6 +149,8 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<!--  //////////////////////////////////////////////////////// -->
 
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>

@@ -33,26 +33,25 @@ $(function(){
 		var board_no = $(this).data("board_no");
 		var user_id = $("#user_id").data("uzser_id");
 		var kind_no = $('#kind_no').val();
-		var kind_name = $('#kind_name').val();
 		
-		$(location).attr('href', '/board/delBoard?user_id='+user_id+"&board_no="+board_no+"&kind_no="+kind_no+"$kind_name="+kind_name);
+		$(location).attr('href', '/board/delBoard?user_id='+user_id+"&board_no="+board_no+"&kind_no="+kind_no);
 	})
 	
 	$('.modBtn_reply').on('click',function(){
-		var reply_no = $(this).data("reply_no");
-		var user_id = $(this).data("user_id");
-		var reply_cont = $(this).data("reply_cont");
-		var board_no = $('#board_no').val();
+// 		var reply_no = $(this).data("reply_no");
+// 		var user_id = $(this).data("user_id");
+// 		var reply_cont = $(this).data("reply_cont");
+// 		var board_no = $('#board_no').val();
 		
-		window.open("/modReply.jsp?reply_no="+reply_no+"&user_id="+user_id+"&reply_cont="+reply_cont+"&board_no="+board_no,
-				"popup_window","left=700, top=400, width=250, height=170, resizable=no, scrollbars=no");
+// 		window.open("/modReply.jsp?reply_no="+reply_no+"&user_id="+user_id+"&reply_cont="+reply_cont+"&board_no="+board_no,
+// 				"popup_window","left=700, top=400, width=250, height=170, resizable=no, scrollbars=no");
 	})
 
 	$('.delBtn_reply').on('click',function(){
 		var reply_no = $(this).data("reply_no");
 		var board_no = $('#board_no').val();
 		
-		$(location).attr('href', '/delreply?reply_no='+reply_no+"&board_no="+board_no);
+		$(location).attr('href', '/board/delreply?reply_no='+reply_no+"&board_no="+board_no);
 	
 	})
 
@@ -62,10 +61,10 @@ $(function(){
 	})
 
 	// 답글 작성 함수
-	$('.replyBoatdBtn').on('click', function(){
+	$('.replyBoardBtn').on('click', function(){
 		var board_no = $(this).data('board_no'); 
 		var kind_no = $(this).data('kind_no'); 
-		$(location).attr('href', '/main_boardReplyRegist.jsp?board_no='+board_no+"&kind_no="+kind_no);
+		$(location).attr('href', '/board/boardReplyRegistView?board_no='+board_no+"&kind_no="+kind_no);
 	})
 })
 </script>
@@ -117,7 +116,7 @@ $(function(){
 						type="button" value="삭제" style="float: right;">
 				</c:if>
 				<c:if test="${BoardVo.user_id != s_member.user_id}">
-					<input class="replyBoatdBtn" data-board_no="${BoardVo.board_no }"
+					<input class="replyBoardBtn" data-board_no="${BoardVo.board_no }"
 						data-kind_no="${BoardVo.kind_no }" type="button" value="답글 쓰기"
 						style="float: right;">
 				</c:if>
